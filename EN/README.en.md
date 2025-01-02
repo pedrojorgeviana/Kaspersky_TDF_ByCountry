@@ -1,4 +1,5 @@
 # Proof of Concept - IP Reputation Filtering by Country
+> **WARNING:** This script is provided as a Proof of Concept (PoC) for educational and demonstrative purposes only. It is not an official Kaspersky tool and does not offer functionality guarantees or support. Use it at your own risk and always validate the results in your environment.
 
 This project allows filtering records from a JSON file containing Threat Data Feeds from the **Kaspersky Threat Intelligence Portal**, which includes IP reputation data based on the **ISO 3166-1 alpha-2 country code**. The primary goal is to process large datasets, identify specific records by country, and generate a filtered file with the results.
 
@@ -46,13 +47,28 @@ This project uses **Threat DataFeeds de Kaspersky** to process and filter record
 ## 📁 Project Structure
 
 ```plaintext
+
 .
-├── feeds/
-│   ├── IP_Reputation_Data_Feed_****.json   # Sample input file
-│   └── ...                                 # Other test files
-├── filtrado_pais.py                        # Main script
-├── test_filtrado_pais.py                   # Automated tests
-└── README.md                               # Project documentation
+├── EN/
+│   ├── scripts/
+│   │   ├── feeds/
+│   │   │   ├── IP_Reputation_Data_Feed_****.json   # Archivo de entrada de ejemplo
+│   │   │   └── ...                                 # Otros archivos de prueba
+│   │   ├── filter_by_country.py                   # Script principal en inglés
+│   │   └── test_filter_by_country.py              # Tests automáticos en inglés
+│   ├── README.en.md                                # Documentación en inglés
+├── ES/
+│   ├── scripts/
+│   │   ├── feeds/
+│   │   │   ├── IP_Reputation_Data_Feed_****.json   # Archivo de entrada de ejemplo
+│   │   │   └── ...                                 # Otros archivos de prueba
+│   │   ├── filtrado_pais.py                       # Script principal en español
+│   │   ├── filtrado_pais_avanzado.py              # Script avanzado en español
+│   │   └── test_filtrado_pais.py                  # Tests automáticos en español
+│   ├── README.md                                   # Documentación en español
+├── .gitignore
+├── LICENSE
+└── requirements.txt
 ```
 
 ## Usage

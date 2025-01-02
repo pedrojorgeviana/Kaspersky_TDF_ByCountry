@@ -1,7 +1,7 @@
 import unittest
 import os
 import json
-from ES.scripts.filtrado_pais import filtrar_por_pais
+from filtrado_pais import filtrar_por_pais
 
 class TestFiltradoPais(unittest.TestCase):
 
@@ -17,7 +17,8 @@ class TestFiltradoPais(unittest.TestCase):
             {"ip_whois": {"country": "ES"}},
             {"ip_whois": {"country": "US"}},
             {"ip_whois": {"country": "ES"}},
-            {"ip_whois": {"country": "FR"}}
+            {"ip_whois": {"country": "FR"}},
+            
         ]
         with open(self.test_file, 'w', encoding='utf-8') as f:
             json.dump(self.test_data, f, ensure_ascii=False, indent=4)

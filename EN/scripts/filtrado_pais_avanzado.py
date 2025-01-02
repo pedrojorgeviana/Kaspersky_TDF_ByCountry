@@ -43,8 +43,8 @@ def parse_arguments():
     parser.add_argument(
         "--input-file",
         type=str,
-        default="EN/feeds/IP_Reputation_Data_Feed.json",
-        help="Path to the input JSON file (default: EN/feeds/IP_Reputation_Data_Feed.json).",
+        default="./feeds/IP_Reputation_Data_Feed.json",
+        help="Path to the input JSON file (default: ./feeds/IP_Reputation_Data_Feed.json).",
     )
     parser.add_argument(
         "--output-file",

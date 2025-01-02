@@ -1,12 +1,12 @@
-# Descripción de la estructura del IP_Reputation Threat Data Feed (Datos Anonimizados)
+# Description of the Structure of the IP_Reputation Threat Data Feed (Anonymized Data)
 
-El archivo `IP_Reputation_Data_Feed_*.json` contiene una lista de registros en formato JSON. Cada registro representa información detallada sobre la reputación de una dirección IP, incluyendo datos sobre actividad maliciosa, geolocalización, popularidad, y metadatos administrativos.
+The `IP_Reputation_Data_Feed_*.json` file contains a list of records in JSON format. Each record provides detailed information about the reputation of an IP address, including data on malicious activity, geolocation, popularity, and administrative metadata.
 
 ---
 
-## Estructura General
+## General Structure
 
-El archivo está estructurado como una lista de objetos JSON, donde cada objeto incluye los siguientes campos:
+The file is structured as a list of JSON objects, where each object includes the following fields:
 
 ```json
 [
@@ -37,48 +37,48 @@ El archivo está estructurado como una lista de objetos JSON, donde cada objeto 
 
 ---
 
-## Descripción de los Campos
+## Field Descriptions
 
-1. **`id`** (Número Entero):
-   - Identificador único del registro en el feed.
+1. **`id`** (Integer):
+   - Unique identifier for the record in the feed.
 
-2. **`ip`** (Cadena):
-   - Dirección IP objetivo (IPv4 o IPv6). En este ejemplo, usamos una IP ficticia dentro del rango reservado para documentación (`203.0.113.0/24`).
+2. **`ip`** (String):
+   - Target IP address (IPv4 or IPv6). In this example, we use a fictitious IP within the documentation-reserved range (`203.0.113.0/24`).
 
-3. **`threat_score`** (Número Entero):
-   - Puntaje de amenaza asignado a la IP. Valores más altos indican mayor peligrosidad.
-   - Rango: 0 a 100.
+3. **`threat_score`** (Integer):
+   - Threat score assigned to the IP. Higher values indicate greater danger.
+   - Range: 0 to 100.
 
-4. **`category`** (Cadena):
-   - Clasificación de la actividad maliciosa asociada con la IP.
-   - Ejemplo: `"phishing"`, `"botnet_cnc"`, `"spam"`, `"malware_hosting"`.
+4. **`category`** (String):
+   - Classification of malicious activity associated with the IP.
+   - Examples: `"phishing"`, `"botnet_cnc"`, `"spam"`, `"malware_hosting"`.
 
-5. **`first_seen`** y **`last_seen`** (Cadenas):
-   - Tiempos de la primera y última detección de actividad maliciosa, en formato `"DD.MM.YYYY HH:MM"`.
+5. **`first_seen`** and **`last_seen`** (Strings):
+   - Timestamps for the first and last detection of malicious activity, formatted as `"DD.MM.YYYY HH:MM"`.
 
-6. **`popularity`** (Número Entero):
-   - Indicador del nivel de popularidad o frecuencia de la IP.
-   - Rango: 0 (baja) a 5 (alta).
+6. **`popularity`** (Integer):
+   - Indicator of the popularity or frequency of the IP.
+   - Range: 0 (low) to 5 (high).
 
-7. **`ip_geo`** (Cadena):
-   - Código del país (ISO 3166-1 alfa-2) donde está físicamente localizada la IP. En este ejemplo: `us` (Estados Unidos).
+7. **`ip_geo`** (String):
+   - ISO 3166-1 alpha-2 country code where the IP is physically located. In this example: `us` (United States).
 
-8. **`users_geo`** (Cadena):
-   - Lista separada por comas de códigos de países (ISO 3166-1 alfa-2) donde se detectaron usuarios afectados.
+8. **`users_geo`** (String):
+   - Comma-separated list of ISO 3166-1 alpha-2 country codes where affected users were detected.
 
-9. **`ip_whois`** (Objeto):
-   - Información administrativa sobre el rango de IP asociado, según registros WHOIS.
-     - **`net_range`**: Rango de direcciones IP ficticio.
-     - **`net_name`**: Nombre ficticio de la red.
-     - **`descr`**: Descripción ficticia del rango.
-     - **`created`** y **`updated`**: Fechas ficticias de creación y actualización del registro WHOIS.
-     - **`country`**: Código de país ficticio.
-     - **`contact_owner_name`**: Nombre ficticio del propietario.
-     - **`contact_owner_code`**: Código ficticio del propietario.
+9. **`ip_whois`** (Object):
+   - Administrative information about the associated IP range, as per WHOIS records.
+     - **`net_range`**: Fictitious IP range.
+     - **`net_name`**: Fictitious network name.
+     - **`descr`**: Fictitious description of the range.
+     - **`created`** and **`updated`**: Fictitious WHOIS record creation and update dates.
+     - **`country`**: Fictitious country code.
+     - **`contact_owner_name`**: Fictitious owner name.
+     - **`contact_owner_code`**: Fictitious owner code.
 
 ---
 
-### Ejemplo de Registro Anonimizado
+### Example of an Anonymized Record
 
 ```json
 {
@@ -106,13 +106,13 @@ El archivo está estructurado como una lista de objetos JSON, donde cada objeto 
 
 ---
 
-## Notas Importantes
+## Important Notes
 
-1. **Datos Ficticios:**
-   - Todas las direcciones IP y datos de registros han sido generados siguiendo convenciones estándar para documentación (por ejemplo, el uso de `203.0.113.0/24` y `198.51.100.0/24` como rangos reservados).
+1. **Fictitious Data:**
+   - All IP addresses and record data have been generated using standard conventions for documentation purposes (e.g., using `203.0.113.0/24` and `198.51.100.0/24` as reserved ranges).
 
-2. **Estructura Respetada:**
-   - Aunque los datos son ficticios, mantienen la estructura y semántica del feed original.
+2. **Structure Maintained:**
+   - Although the data is fictitious, it retains the structure and semantics of the original feed.
 
-3. **Referencias:**
-   - Más información sobre el feed puede consultarse en la documentación oficial: [Kaspersky Threat Intelligence - IP Reputation Feed](https://tip.kaspersky.com/Help/TIDF/en-US/IpReputationFeed.htm).
+3. **References:**
+   - More information about the feed can be found in the official documentation: [Kaspersky Threat Intelligence - IP Reputation Feed](https://tip.kaspersky.com/Help/TIDF/en-US/IpReputationFeed.htm).

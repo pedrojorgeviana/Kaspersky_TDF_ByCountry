@@ -1,6 +1,8 @@
 # Prueba de Concepto - Filtrado de IP Reputation por País
 
-> **English version available:** For the English version of this documentation, see [README.en.md](README.en.md).
+> **English version available:** For the English version of this documentation, see [README.en.md](./EN/README.en.md).
+
+> **AVISO:** Este script se proporciona como una Prueba de Concepto (PoC) con fines educativos y demostrativos únicamente. No es una herramienta oficial de Kaspersky, ni ofrece garantías o soporte de funcionalidad. Úselo bajo su propio riesgo y siempre valide los resultados en su entorno.
 
 Este proyecto permite filtrar registros de un archivo JSON the Threat DataFeeds de Kaspersky Threat Intelligence Portal, que contiene datos de reputación de IPs en base al **código de país** especificado en formato ISO 3166-1 alfa-2. El objetivo principal es procesar grandes conjuntos de datos, identificar registros específicos por país, y generar un archivo filtrado con los resultados.
 
@@ -10,6 +12,10 @@ Este proyecto permite filtrar registros de un archivo JSON the Threat DataFeeds 
 - **Manejo de Errores**: Soporte para archivos inexistentes, JSON malformados y estructuras inesperadas.
 - **Resultados Enriquecidos**: Incluye el nombre del país en el archivo de salida, junto con un timestamp para mayor trazabilidad.
 - **Carpeta de Trabajo `feeds`**: Todos los archivos de entrada y salida se procesan dentro de la carpeta `feeds`.
+- **Filtrado Avanzado**: Capacidad para filtrar por:
+  - **Ubicación Geográfica**: Basado en el campo `ip_geo`.
+  - **Ubicación Administrativa**: Basado en el campo `ip_whois.country`.
+  - **Combinado**: Filtro que considera tanto geolocalización como registros administrativos.
 
 ## 🔧 Requisitos
 
@@ -43,28 +49,47 @@ Este proyecto utiliza los **Threat DataFeeds de Kaspersky** para procesar y filt
 2. Inicia sesión con tus credenciales.
 3. Descarga el feed de datos correspondiente (por ejemplo, `IP_Reputation_Data_Feed.json`).
 4. Coloca el archivo descargado en la carpeta `feeds` del proyecto.
-5. Modifica la variable `fichero_entrada` en el fichero `filtrado_pais.py` por el nombre del feed de datos descargado
+5. Modifica la variable `fichero_entrada` en el fichero `filtrado_pais.py` o utiliza la opción `--input-file` en el script avanzado.
 
-## 📁 Estructura del Proyecto
+## 🗋 Estructura del Proyecto
 
 ```plaintext
 .
-├── feeds/
-│   ├── IP_Reputation_Data_Feed_****.json   # Archivo de entrada de ejemplo
-│   └── ...                                        # Otros archivos de prueba
-├── filtrado_pais.py                             # Script principal
-├── test_filtrado_pais.py                          # Tests automáticos
-└── README.md                                      # Documentación del proyecto
+├── EN/
+│   ├── scripts/
+│   │   ├── feeds/
+│   │   │   ├── IP_Reputation_Data_Feed_****.json   # Archivo de entrada de ejemplo
+│   │   │   └── ...                                 # Otros archivos de prueba
+│   │   ├── filter_by_country.py                   # Script principal en inglés
+│   │   └── test_filter_by_country.py              # Tests automáticos en inglés
+│   ├── README.en.md                                # Documentación en inglés
+├── ES/
+│   ├── scripts/
+│   │   ├── feeds/
+│   │   │   ├── IP_Reputation_Data_Feed_****.json   # Archivo de entrada de ejemplo
+│   │   │   └── ...                                 # Otros archivos de prueba
+│   │   ├── filtrado_pais.py                       # Script principal en español
+│   │   ├── filtrado_pais_avanzado.py              # Script avanzado en español
+│   │   └── test_filtrado_pais.py                  # Tests automáticos en español
+│   ├── README.md                                   # Documentación en español
+├── .gitignore
+├── LICENSE
+└── requirements.txt
 ```
 
 ## Uso
 
 ### 1. Preparar la Carpeta `feeds`
 
-Crea una carpeta llamada `feeds` en el directorio raíz y coloca el archivo de entrada JSON dentro de esta. Por ejemplo:
+Crea una carpeta llamada `feeds` en el directorio correspondiente (`EN/scripts/feeds` o `ES/scripts/feeds`) y coloca el archivo de entrada JSON dentro de esta. Por ejemplo:
 
 ```plaintext
-feeds/
+EN/scripts/feeds/
+└── IP_Reputation_Data_Feed_****.json
+```
+
+```plaintext
+ES/scripts/feeds/
 └── IP_Reputation_Data_Feed_****.json
 ```
 
@@ -73,26 +98,38 @@ feeds/
 Ejecuta el script principal para filtrar los registros por un código de país específico:
 
 ```bash
-python filtrado_pais.py
+python EN/scripts/filter_by_country.py
 ```
 
-El archivo de salida se guardará en la carpeta `feeds` con un nombre que incluye el país y un timestamp, por ejemplo:
+O, para la versión en español:
+
+```bash
+python ES/scripts/filtrado_pais.py
+```
+
+Para usar el script avanzado que incluye modos de filtrado (`geo`, `admin` o `combined`):
+
+```bash
+python ES/scripts/filtrado_pais_avanzado.py --country ES --filter-mode geo --input-file ./ES/scripts/feeds/IP_Reputation_Data_Feed.json
+```
+
+El archivo de salida se guardará en la carpeta `feeds` con un nombre que incluye el país, el modo de filtrado y un timestamp, por ejemplo:
 
 ```plaintext
-feeds/IP_Reputation_filtrado_ES_*****.json
+feeds/IP_Reputation_filtrado_ES_geo_*****.json
 ```
 
 ### 3. Modificar el Código de País
 
-Puedes cambiar el código de país modificando la variable `pais` dentro de `filtrado_pais.py`. Por ejemplo:
+Puedes cambiar el código de país utilizando el argumento `--country`. Por ejemplo:
 
-```python
-pais = 'ES'  # Cambiar a España o a cualquier otro país
+```bash
+python ES/scripts/filtrado_pais_avanzado.py --country US --filter-mode combined --input-file ./ES/scripts/feeds/IP_Reputation_Data_Feed.json
 ```
 
 ## Tests
 
-Este proyecto incluye una suite de tests automáticos para validar su funcionamiento. Los tests están ubicados en el archivo `test_filtrado_pais.py` y cubren casos como:
+Este proyecto incluye una suite de tests automáticos para validar su funcionamiento. Los tests están ubicados en los archivos `test_filtrado_pais.py` (español) y `test_filter_by_country.py` (inglés) y cubren casos como:
 
 - Archivos con registros válidos.
 - Archivos sin coincidencias.
@@ -104,7 +141,13 @@ Este proyecto incluye una suite de tests automáticos para validar su funcionami
 Para ejecutar los tests, usa el siguiente comando:
 
 ```bash
-python -m unittest test_filtrado_pais.py
+python -m unittest EN/scripts/test_filter_by_country.py
+```
+
+O para la versión en español:
+
+```bash
+python -m unittest ES/scripts/test_filtrado_pais.py
 ```
 
 Salida esperada si todo funciona correctamente:
@@ -122,7 +165,7 @@ OK
 
 ## Ejemplo de JSON de Entrada
 
-El archivo `IP_Reputation_Data_Feed_171224_0757.json` debe tener una estructura similar a la siguiente:
+El archivo `IP_Reputation_Data_Feed.json` debe tener una estructura similar a la siguiente:
 
 ```json
 [

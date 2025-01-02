@@ -1,3 +1,9 @@
+# Prueba de Concepto (PoC) para Filtrado por Código de País
+# Este script demuestra el filtrado de datos de un archivo JSON que contiene información de reputación de IP.
+# AVISO: Este script se proporciona como una Prueba de Concepto (PoC) con fines educativos y demostrativos únicamente.
+# No es una herramienta oficial de Kaspersky, ni ofrece garantías o soporte de funcionalidad.
+# Úselo bajo su propio riesgo y siempre valide los resultados en su entorno.
+
 import json
 import datetime
 import os
@@ -61,6 +67,14 @@ def filtrar_por_pais(fichero_entrada, fichero_salida):
         raise
 
 if __name__ == "__main__":
+     # Mostrar aviso
+    disclaimer = (
+        "\n*** AVISO ***\n"
+        "Este script se proporciona como una Prueba de Concepto (PoC) con fines educativos y demostrativos únicamente.\n"
+        "No es una herramienta oficial de Kaspersky, ni ofrece garantías o soporte de funcionalidad.\n"
+        "Úselo bajo su propio riesgo y siempre valide los resultados en su entorno.\n"
+    )
+    print(disclaimer)
     # Archivos en la carpeta feeds
     carpeta = "./feeds/"
     fichero_entrada = os.path.join(carpeta, "IP_Reputation_Data_Feed_200516_1445.json")

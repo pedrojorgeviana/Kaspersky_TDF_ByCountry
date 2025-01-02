@@ -1,8 +1,8 @@
-# Proof of Concept (PoC) for Advanced Filtering by Country Code
-# This script demonstrates the feasibility of filtering data from a pre-downloaded JSON file based on IP reputation data.
-# DISCLAIMER: This script is provided as a Proof of Concept (PoC) for educational and demonstration purposes only.
-# It is not an official tool from Kaspersky, nor does it come with any guarantees or warranties of functionality or support.
-# Use at your own risk, and always validate the results in your environment.
+# Prueba de Concepto (PoC) para Filtrado Avanzado por Código de País
+# Este script demuestra la viabilidad de filtrar datos de un archivo JSON predescargado basado en datos de reputación de IP.
+# AVISO: Este script se proporciona como una Prueba de Concepto (PoC) con fines educativos y demostrativos únicamente.
+# No es una herramienta oficial de Kaspersky, ni ofrece garantías o soporte de funcionalidad.
+# Úselo bajo su propio riesgo y siempre valide los resultados en su entorno.
 
 import argparse
 import json
@@ -10,176 +10,168 @@ import os
 from datetime import datetime
 import pycountry
 
-def display_disclaimer():
+def mostrar_aviso():
     """
-    Display a disclaimer message each time the script is executed.
+    Muestra un mensaje de aviso cada vez que se ejecuta el script.
     """
-    disclaimer = (
-        "\n*** DISCLAIMER ***\n"
-        "This script is provided as a Proof of Concept (PoC) for educational and demonstration purposes only.\n"
-        "It is not an official tool from Kaspersky, nor does it come with any guarantees or warranties of functionality or support.\n"
-        "Use at your own risk, and always validate the results in your environment.\n"
+    aviso = (
+        "\n*** AVISO ***\n"
+        "Este script se proporciona como una Prueba de Concepto (PoC) con fines educativos y demostrativos únicamente.\n"
+        "No es una herramienta oficial de Kaspersky, ni ofrece garantías o soporte de funcionalidad.\n"
+        "Úselo bajo su propio riesgo y siempre valide los resultados en su entorno.\n"
     )
-    print(disclaimer)
+    print(aviso)
 
-def parse_arguments():
+def parsear_argumentos():
     """
-    Parse command-line arguments for the script.
+    Analiza los argumentos de la línea de comandos para el script.
     """
-    parser = argparse.ArgumentParser(description="Advanced country-based filtering for IP reputation data.")
+    parser = argparse.ArgumentParser(description="Filtrado avanzado basado en país para datos de reputación de IP.")
     parser.add_argument(
         "--country",
         type=str,
         required=True,
-        help="ISO 3166-1 alpha-2 country code to filter by (e.g., ES for Spain).",
+        help="Código de país ISO 3166-1 alfa-2 para filtrar (por ejemplo, ES para España).",
     )
     parser.add_argument(
         "--filter-mode",
         type=str,
         choices=["geo", "admin", "combined"],
         default="combined",
-        help="Filtering mode: 'geo', 'admin', or 'combined' (default: combined).",
+        help="Modo de filtrado: 'geo', 'admin' o 'combined' (por defecto: combined).",
     )
     parser.add_argument(
         "--input-file",
         type=str,
         default="./feeds/IP_Reputation_Data_Feed.json",
-        help="Path to the input JSON file (default: ./feeds/IP_Reputation_Data_Feed.json).",
+        help="Ruta al archivo JSON de entrada (por defecto: ./feeds/IP_Reputation_Data_Feed.json).",
     )
     parser.add_argument(
         "--output-file",
         type=str,
         default=None,
-        help="Path to the output JSON file. If not specified, a file name will be generated automatically.",
+        help="Ruta al archivo JSON de salida. Si no se especifica, se generará un nombre automáticamente.",
     )
     return parser.parse_args()
 
-def validate_country_code(country_code):
+def validar_codigo_pais(codigo_pais):
     """
-    Validate the country code.
+    Valida el código de país.
     """
-    if len(country_code) != 2 or not country_code.isalpha():
-        raise ValueError(f"Invalid country code: {country_code}. It must be a two-letter ISO 3166-1 alpha-2 code.")
+    if len(codigo_pais) != 2 or not codigo_pais.isalpha():
+        raise ValueError(f"Código de país inválido: {codigo_pais}. Debe ser un código ISO 3166-1 alfa-2 de dos letras.")
 
-    # Check if the country code exists in pycountry
-    if not pycountry.countries.get(alpha_2=country_code.upper()):
-        raise ValueError(f"Country code '{country_code}' is not a valid ISO 3166-1 alpha-2 code.")
+    if not pycountry.countries.get(alpha_2=codigo_pais.upper()):
+        raise ValueError(f"El código de país '{codigo_pais}' no es válido según ISO 3166-1 alfa-2.")
 
-def normalize_country_code(country_code):
+def normalizar_codigo_pais(codigo_pais):
     """
-    Normalize the country code to uppercase.
+    Normaliza el código de país a mayúsculas.
     """
-    return country_code.upper()
+    return codigo_pais.upper()
 
-def load_input_file(input_file):
+def cargar_archivo_entrada(archivo_entrada):
     """
-    Load the JSON data from the input file.
+    Carga los datos JSON desde el archivo de entrada.
     """
-    if not os.path.exists(input_file):
-        raise FileNotFoundError(f"Input file not found: {input_file}")
+    if not os.path.exists(archivo_entrada):
+        raise FileNotFoundError(f"Archivo de entrada no encontrado: {archivo_entrada}")
 
     try:
-        with open(input_file, "r", encoding="utf-8") as f:
-            data = json.load(f)
+        with open(archivo_entrada, "r", encoding="utf-8") as f:
+            datos = json.load(f)
     except json.JSONDecodeError as e:
-        raise ValueError(f"Invalid JSON format in the input file: {e}")
+        raise ValueError(f"Formato JSON inválido en el archivo de entrada: {e}")
     except PermissionError as e:
-        raise PermissionError(f"Permission denied when accessing the file: {input_file}. Details: {e}")
+        raise PermissionError(f"Permiso denegado al acceder al archivo: {archivo_entrada}. Detalles: {e}")
 
-    if not data:
-        raise ValueError("The input file is empty or contains no records.")
+    if not datos:
+        raise ValueError("El archivo de entrada está vacío o no contiene registros.")
 
-    return data
+    return datos
 
-def ensure_output_directory(output_file):
+def asegurar_directorio_salida(archivo_salida):
     """
-    Ensure the output directory exists, create it if necessary.
+    Asegura que el directorio de salida exista, lo crea si es necesario.
     """
-    output_dir = os.path.dirname(output_file)
-    if output_dir and not os.path.exists(output_dir):
+    directorio_salida = os.path.dirname(archivo_salida)
+    if directorio_salida and not os.path.exists(directorio_salida):
         try:
-            os.makedirs(output_dir)
+            os.makedirs(directorio_salida)
         except PermissionError as e:
-            raise PermissionError(f"Permission denied when creating the output directory: {output_dir}. Details: {e}")
+            raise PermissionError(f"Permiso denegado al crear el directorio de salida: {directorio_salida}. Detalles: {e}")
 
-def generate_output_filename(input_file, mode):
+def generar_nombre_archivo_salida(archivo_entrada, modo):
     """
-    Generate an output file name based on the input file name, filtering mode, and timestamp.
+    Genera un nombre de archivo de salida basado en el archivo de entrada, el modo de filtrado y la marca de tiempo.
     """
-    base_name = os.path.splitext(os.path.basename(input_file))[0]
+    nombre_base = os.path.splitext(os.path.basename(archivo_entrada))[0]
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    return f"feeds/{base_name}_{mode}_{timestamp}.json"
+    return f"feeds/{nombre_base}_{modo}_{timestamp}.json"
 
-def filter_geo(data, country):
+def filtrar_geo(datos, pais):
     """
-    Filter data by geographical location (ip_geo).
+    Filtra datos por ubicación geográfica (ip_geo).
     """
-    normalized_country = country.lower()
-    return [entry for entry in data if entry.get("ip_geo", "").lower() == normalized_country]
+    pais_normalizado = pais.lower()
+    return [entrada for entrada in datos if entrada.get("ip_geo", "").lower() == pais_normalizado]
 
-def filter_admin(data, country):
+def filtrar_admin(datos, pais):
     """
-    Filter data by administrative location (ip_whois.country).
+    Filtra datos por ubicación administrativa (ip_whois.country).
     """
-    normalized_country = country.upper()
-    return [entry for entry in data if entry.get("ip_whois", {}).get("country", "").upper() == normalized_country]
+    pais_normalizado = pais.upper()
+    return [entrada for entrada in datos if entrada.get("ip_whois", {}).get("country", "").upper() == pais_normalizado]
 
-def filter_combined(data, country):
+def filtrar_combinado(datos, pais):
     """
-    Filter data by either geographical or administrative location.
+    Filtra datos por ubicación geográfica o administrativa.
     """
-    normalized_geo_country = country.lower()
-    normalized_admin_country = country.upper()
+    geo_normalizado = pais.lower()
+    admin_normalizado = pais.upper()
     return [
-        entry
-        for entry in data
-        if entry.get("ip_geo", "").lower() == normalized_geo_country or entry.get("ip_whois", {}).get("country", "").upper() == normalized_admin_country
+        entrada
+        for entrada in datos
+        if entrada.get("ip_geo", "").lower() == geo_normalizado or entrada.get("ip_whois", {}).get("country", "").upper() == admin_normalizado
     ]
 
-def save_output_file(output_file, filtered_data):
+def guardar_archivo_salida(archivo_salida, datos_filtrados):
     """
-    Save the filtered data to the output file.
+    Guarda los datos filtrados en el archivo de salida.
     """
     try:
-        with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(filtered_data, f, indent=4, ensure_ascii=False)
+        with open(archivo_salida, "w", encoding="utf-8") as f:
+            json.dump(datos_filtrados, f, indent=4, ensure_ascii=False)
     except PermissionError as e:
-        raise PermissionError(f"Permission denied when writing to the file: {output_file}. Details: {e}")
+        raise PermissionError(f"Permiso denegado al escribir en el archivo: {archivo_salida}. Detalles: {e}")
 
 def main():
-    display_disclaimer()
+    mostrar_aviso()
 
-    args = parse_arguments()
+    args = parsear_argumentos()
 
     try:
-        # Validate and normalize country code
-        validate_country_code(args.country)
-        country = normalize_country_code(args.country)
+        validar_codigo_pais(args.country)
+        pais = normalizar_codigo_pais(args.country)
 
-        # Load input data
-        data = load_input_file(args.input_file)
+        datos = cargar_archivo_entrada(args.input_file)
 
-        # Determine output file name if not specified
-        output_file = args.output_file or generate_output_filename(args.input_file, args.filter_mode)
+        archivo_salida = args.output_file or generar_nombre_archivo_salida(args.input_file, args.filter_mode)
 
-        # Ensure output directory exists
-        ensure_output_directory(output_file)
+        asegurar_directorio_salida(archivo_salida)
 
-        # Apply filtering logic
         if args.filter_mode == "geo":
-            filtered_data = filter_geo(data, country)
+            datos_filtrados = filtrar_geo(datos, pais)
         elif args.filter_mode == "admin":
-            filtered_data = filter_admin(data, country)
-        else:  # combined
-            filtered_data = filter_combined(data, country)
+            datos_filtrados = filtrar_admin(datos, pais)
+        else:  # combinado
+            datos_filtrados = filtrar_combinado(datos, pais)
 
-        # Save the filtered data
-        save_output_file(output_file, filtered_data)
+        guardar_archivo_salida(archivo_salida, datos_filtrados)
 
-        # Print summary
-        print(f"Total records processed: {len(data)}")
-        print(f"Records matching criteria: {len(filtered_data)}")
-        print(f"Filtered data saved to: {output_file}")
+        print(f"Total de registros procesados: {len(datos)}")
+        print(f"Registros que cumplen los criterios: {len(datos_filtrados)}")
+        print(f"Datos filtrados guardados en: {archivo_salida}")
 
     except FileNotFoundError as e:
         print(f"Error: {e}")
@@ -188,7 +180,7 @@ def main():
     except ValueError as e:
         print(f"Error: {e}")
     except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        print(f"Se produjo un error inesperado: {e}")
 
 if __name__ == "__main__":
     main()
