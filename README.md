@@ -27,6 +27,7 @@ pip install -r requirements.txt
 Contenido del archivo `requirements.txt`:
 
 ```**Dependencias**
+coverage==7.6.10
 pycountry==22.3.5
 ```
 
