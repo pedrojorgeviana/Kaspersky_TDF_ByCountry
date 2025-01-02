@@ -123,8 +123,8 @@ OK
 The file `IP_Reputation_Data_Feed_171224_0757.json` should have a structure similar to the following:
 
 ```json
-```json
 [
+    ...
     {
         "id": 1234567890,
         "ip": "203.0.113.42",
@@ -159,7 +159,7 @@ A filtered file for `country = 'ES'` would have the following structure:
   ...
     {"ip_whois": {"country": "ES", "org": "ISP España"}},
     {"ip_whois": {"country": "ES", "org": "ISP España 2"}},
-    ...
+  ...
 ]
 ```
 

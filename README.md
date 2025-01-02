@@ -126,9 +126,29 @@ El archivo `IP_Reputation_Data_Feed_171224_0757.json` debe tener una estructura 
 
 ```json
 [
-    {"ip_whois": {"country": "ES", "org": "ISP España"}},
-    {"ip_whois": {"country": "US", "org": "ISP USA"}},
-    {"ip_whois": {"country": "ES", "org": "ISP España 2"}}
+    ...
+    {
+        "id": 1234567890,
+        "ip": "203.0.113.42",
+        "threat_score": 85,
+        "category": "phishing",
+        "first_seen": "01.01.2025 12:00",
+        "last_seen": "02.01.2025 18:30",
+        "popularity": 3,
+        "ip_geo": "us",
+        "users_geo": "es, fr, de, it, nl",
+        "ip_whois": {
+            "net_range": "203.0.113.0 - 203.0.113.255",
+            "net_name": "ExampleNet",
+            "descr": "Example Description for Network Range",
+            "created": "15.06.2022",
+            "updated": "10.11.2024",
+            "country": "US",
+            "contact_owner_name": "Example Hosting",
+            "contact_owner_code": "ORG-EX123-RIPE"
+        }
+    },
+    ...
 ]
 ```
 
@@ -138,8 +158,10 @@ Un archivo filtrado para `country = 'ES'` tendría la siguiente estructura:
 
 ```json
 [
+  ...
     {"ip_whois": {"country": "ES", "org": "ISP España"}},
-    {"ip_whois": {"country": "ES", "org": "ISP España 2"}}
+    {"ip_whois": {"country": "ES", "org": "ISP España 2"}},
+  ...
 ]
 ```
 
