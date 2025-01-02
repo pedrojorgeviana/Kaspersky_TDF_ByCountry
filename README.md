@@ -1,5 +1,7 @@
 # Filtrado de IP Reputation por País
 
+> **English version available:** For the English version of this documentation, see [README.en.md](README.en.md).
+
 Este proyecto permite filtrar registros de un archivo JSON the Threat DataFeeds de Kaspersky Threat Intelligence Portal, que contiene datos de reputación de IPs en base al **código de país** especificado en formato ISO 3166-1 alfa-2. El objetivo principal es procesar grandes conjuntos de datos, identificar registros específicos por país, y generar un archivo filtrado con los resultados.
 
 ## 🎯 Características
@@ -83,7 +85,7 @@ feeds/IP_Reputation_filtrado_ES_*****.json
 Puedes cambiar el código de país modificando la variable `pais` dentro de `filtrado_pais.py`. Por ejemplo:
 
 ```python
-pais = 'ES'  # Cambiar a España
+pais = 'ES'  # Cambiar a España o a cualquier otro país
 ```
 
 ## Tests
