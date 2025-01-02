@@ -1,7 +1,7 @@
 import unittest
 import os
 import json
-from filtrado_pais import filtrar_por_pais
+from ES.scripts.filtrado_pais import filtrar_por_pais
 
 class TestFiltradoPais(unittest.TestCase):
 

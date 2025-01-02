@@ -1,4 +1,4 @@
-# IP Reputation Filtering by Country
+# Proof of Concept - IP Reputation Filtering by Country
 
 This project allows filtering records from a JSON file containing Threat Data Feeds from the **Kaspersky Threat Intelligence Portal**, which includes IP reputation data based on the **ISO 3166-1 alpha-2 country code**. The primary goal is to process large datasets, identify specific records by country, and generate a filtered file with the results.
 

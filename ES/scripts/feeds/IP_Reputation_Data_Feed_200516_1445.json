@@ -1,0 +1,242 @@
+[
+  {
+    "ip": "1.2.3.4",
+    "threat_score": 97,
+    "category": "malware-ESPAÑOL",
+    "first_seen": "21.01.2015 00:00",
+    "last_seen": "20.05.2016 03:48",
+    "popularity": 1,
+    "ip_geo": "es",
+    "users_geo": "us"
+  },
+  {
+    "ip": "1.2.3.5",
+    "threat_score": 97,
+    "category": "malware-ESPAÑOL",
+    "first_seen": "21.01.2015 00:00",
+    "last_seen": "20.05.2016 03:48",
+    "popularity": 1,
+    "ip_geo": "es",
+    "users_geo": "us",
+    "ip_whois": {
+            "net_range": "1.2.3.4 - 1.2.3.6",
+            "net_name": "TEST_LIMITED",
+            "descr": "TEST_LIMITED",
+            "country": "NL",
+            "asn": "50580"
+        }
+    },
+  {
+    "ip": "1.2.3.6",
+    "threat_score": 97,
+    "category": "malware-ESPAÑOL",
+    "first_seen": "21.01.2015 00:00",
+    "last_seen": "20.05.2016 03:48",
+    "popularity": 1,
+    "ip_geo": "es",
+    "users_geo": "us",
+    "ip_whois": {
+            "net_range": "1.2.3.4 - 1.2.3.6",
+            "net_name": "TEST_LIMITED",
+            "descr": "TEST_LIMITED",
+            "country": "ES",
+            "asn": "50580"
+        }
+  },
+  {
+    "ip": "1.2.3.7",
+    "threat_score": 97,
+    "category": "malware-ESPAÑOL",
+    "first_seen": "21.01.2015 00:00",
+    "last_seen": "20.05.2016 03:48",
+    "popularity": 1,
+    "ip_geo": "nl",
+    "users_geo": "us",
+    "ip_whois": {
+            "net_range": "1.2.3.4 - 1.2.3.7",
+            "net_name": "TEST_LIMITED",
+            "descr": "TEST_LIMITED",
+            "country": "ES",
+            "asn": "50580"
+        }
+  },
+  {
+    "ip": "11.22.33.44",
+    "threat_score": 90,
+    "category": "malware",
+    "first_seen": "20.01.2015 00:00",
+    "popularity": 5,
+    "ip_geo": "gb",
+    "users_geo": "gb"
+  },
+  {
+    "ip": "1.1.1.1",
+    "threat_score": 90,
+    "category": "malware",
+    "first_seen": "21.01.2015 00:00",
+    "last_seen": "17.05.2016 03:16",
+    "popularity": 1,
+    "ip_geo": "us"
+  },
+  {
+    "ip": "88.88.88.88",
+    "threat_score": 89,
+    "category": "malware",
+    "first_seen": "22.01.2015 00:00",
+    "last_seen": "20.05.2016 11:17",
+    "popularity": 4,
+    "ip_geo": "us",
+    "users_geo": "sa, ae, jp, dz, in, au, om, qa, ca, de"
+  },
+  {
+    "ip": "3.3.3.3",
+    "threat_score": 89,
+    "category": "malware",
+    "first_seen": "22.03.2016 00:00",
+    "last_seen": "16.05.2016 16:08",
+    "popularity": 4,
+    "ip_geo": "ru"
+  },
+  {
+    "ip": "111.111.111.111",
+    "threat_score": 85,
+    "category": "malware",
+    "first_seen": "22.03.2016 00:00",
+    "last_seen": "16.05.2016 13:38",
+    "popularity": 1,
+    "ip_geo": "us"
+  },
+  {
+    "ip": "5.5.5.5",
+    "threat_score": 83,
+    "category": "malware",
+    "first_seen": "25.08.2015 00:00",
+    "last_seen": "19.05.2016 20:16",
+    "popularity": 2,
+    "ip_geo": "ca",
+    "users_geo": "ca"
+  },
+  {
+    "ip": "222.222.222.222",
+    "threat_score": 74,
+    "category": "malware",
+    "first_seen": "19.04.2016 00:00",
+    "last_seen": "20.05.2016 11:09",
+    "popularity": 3,
+    "ip_geo": "de",
+    "users_geo": "kr, us, de, it, tw, br, sa, es, vn, mx"
+  },
+  {
+    "ip": "119.119.119.119",
+    "threat_score": 74,
+    "category": "malware",
+    "first_seen": "18.12.2015 00:00",
+    "last_seen": "20.05.2016 09:06",
+    "popularity": 3,
+    "ip_geo": "us",
+    "users_geo": "vn, us, ru"
+  },
+  {
+    "ip": "178.178.178.178",
+    "threat_score": 74,
+    "category": "malware",
+    "first_seen": "06.11.2015 00:00",
+    "last_seen": "19.05.2016 03:03",
+    "popularity": 2,
+    "ip_geo": "th",
+    "users_geo": "th, vn"
+  },
+  {
+    "ip": "4.4.4.4",
+    "threat_score": 74,
+    "category": "malware",
+    "first_seen": "18.12.2015 00:00",
+    "last_seen": "20.05.2016 09:06",
+    "popularity": 3,
+    "ip_geo": "us",
+    "users_geo": "vn, us, ru"
+  },
+  {
+    "ip": "15.0.0.5",
+    "threat_score": 74,
+    "category": "malware",
+    "first_seen": "28.05.2015 00:00",
+    "last_seen": "20.05.2016 13:23",
+    "popularity": 3,
+    "ip_geo": "gb",
+    "users_geo": "us, ke, bd, ru, lk, my"
+  },
+  {
+    "ip": "18.18.18.18",
+    "threat_score": 80,
+    "category": "tor_exit_node",
+    "first_seen": "16.05.2016 12:09",
+    "popularity": 1,
+    "ip_geo": "hu"
+  },
+  {
+    "ip": "99.99.99.99",
+    "threat_score": 80,
+    "category": "tor_exit_node",
+    "first_seen": "16.05.2016 12:12",
+    "popularity": 1,
+    "ip_geo": "pt"
+  },
+  {
+    "ip": "20.20.20.20",
+    "threat_score": 90,
+    "category": "tor_exit_node",
+    "first_seen": "16.05.2016 11:54",
+    "last_seen": "17.05.2016 00:22",
+    "popularity": 3,
+    "ip_geo": "fr"
+  },
+  {
+    "ip": "50.50.50.50",
+    "threat_score": 80,
+    "category": "tor_exit_node",
+    "first_seen": "16.05.2016 11:53",
+    "last_seen": "11.05.2016 15:46",
+    "popularity": 4,
+    "ip_geo": "nl"
+  },
+  {
+    "ip": "200.200.200.200",
+    "threat_score": 74,
+    "category": "spam",
+    "first_seen": "20.05.2016 10:20",
+    "last_seen": "19.05.2016 13:15",
+    "popularity": 1,
+    "ip_geo": "gb"
+  },
+  {
+    "ip": "77.88.55.55",
+    "threat_score": 74,
+    "category": "spam",
+    "first_seen": "16.05.2016 11:58",
+    "last_seen": "19.05.2016 11:21",
+    "popularity": 4,
+    "ip_geo": "ua",
+    "users_geo": "de"
+  },
+  {
+    "ip": "2.2.2.2",
+    "threat_score": 74,
+    "category": "spam",
+    "first_seen": "16.05.2016 11:58",
+    "last_seen": "19.05.2016 07:26",
+    "popularity": 2,
+    "ip_geo": "tr",
+    "users_geo": "hk, vn, ru, tw, in"
+  },
+  {
+    "ip": "7.7.7.7",
+    "threat_score": 74,
+    "category": "spam",
+    "first_seen": "16.05.2016 12:01",
+    "last_seen": "18.05.2016 18:41",
+    "popularity": 2,
+    "ip_geo": "uz",
+    "users_geo": "ru, ua"
+  }
+]
