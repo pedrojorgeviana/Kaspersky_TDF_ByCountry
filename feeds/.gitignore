@@ -1,0 +1,52 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+.venv/
+*.egg-info/
+.Python
+
+# Logs
+*.log
+*.out
+*.err
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Configuración específica del usuario
+*.local
+*.history
+
+# Archivos de test y salidas temporales
+feeds/test_filtered_feed.json
+feeds/*.tmp
+feeds/*.bak
+
+# Cobertura de código
+htmlcov/
+coverage.*
+.cache
+nosetests.xml
+*.cover
+*.coverage
+.cache/
+
+# Entornos virtuales
+env/
+venv/
+ENV/
+
+# Archivos comprimidos
+*.zip
+*.tar.gz
+*.rar

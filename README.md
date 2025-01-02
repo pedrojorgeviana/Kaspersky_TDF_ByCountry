@@ -1,0 +1,225 @@
+# Filtrado de IP Reputation por País
+
+Este proyecto permite filtrar registros de un archivo JSON the Threat DataFeeds de Kaspersky Threat Intelligence Portal, que contiene datos de reputación de IPs en base al **código de país** especificado en formato ISO 3166-1 alfa-2. El objetivo principal es procesar grandes conjuntos de datos, identificar registros específicos por país, y generar un archivo filtrado con los resultados.
+
+## 🎯 Características
+
+- **Filtro Personalizable**: Filtra registros de un archivo JSON por país usando un código ISO 3166-1 alfa-2 (por ejemplo, `ES` para España, `US` para Estados Unidos).
+- **Manejo de Errores**: Soporte para archivos inexistentes, JSON malformados y estructuras inesperadas.
+- **Resultados Enriquecidos**: Incluye el nombre del país en el archivo de salida, junto con un timestamp para mayor trazabilidad.
+- **Carpeta de Trabajo `feeds`**: Todos los archivos de entrada y salida se procesan dentro de la carpeta `feeds`.
+
+## 🔧 Requisitos
+
+- **Python**: 3.8 o superior.
+- **Dependencias**:
+  - `pycountry`: Para obtener el nombre del país basado en su código ISO.
+  - `unittest`: Biblioteca estándar para ejecutar tests.
+
+Puedes instalar las dependencias con el siguiente comando:
+
+```bash
+pip install -r requirements.txt
+```
+
+Contenido del archivo `requirements.txt`:
+
+```**Dependencias**
+pycountry==22.3.5
+```
+
+## 📥 Descarga de Datos
+
+### Datos Requeridos
+
+Este proyecto utiliza los **Threat DataFeeds de Kaspersky** para procesar y filtrar registros por país. Actualmente, la descarga de los datos debe realizarse **manualmente** desde el portal de Kaspersky Threat Intelligence, siempre y cuando tengas las licencias necesarias habilitadas.
+
+**Pasos para la descarga:**
+
+1. Accede a [Kaspersky Threat Intelligence Portal](https://tip.kaspersky.com).
+2. Inicia sesión con tus credenciales.
+3. Descarga el feed de datos correspondiente (por ejemplo, `IP_Reputation_Data_Feed.json`).
+4. Coloca el archivo descargado en la carpeta `feeds` del proyecto.
+
+## 📁 Estructura del Proyecto
+
+```plaintext
+.
+├── feeds/
+│   ├── IP_Reputation_Data_Feed_****.json   # Archivo de entrada de ejemplo
+│   └── ...                                        # Otros archivos de prueba
+├── filtrado_pais.py                             # Script principal
+├── test_filtrado_pais.py                          # Tests automáticos
+└── README.md                                      # Documentación del proyecto
+```
+
+## Uso
+
+### 1. Preparar la Carpeta `feeds`
+
+Crea una carpeta llamada `feeds` en el directorio raíz y coloca el archivo de entrada JSON dentro de esta. Por ejemplo:
+
+```plaintext
+feeds/
+└── IP_Reputation_Data_Feed_****.json
+```
+
+### 2. Ejecutar el Script Principal
+
+Ejecuta el script principal para filtrar los registros por un código de país específico:
+
+```bash
+python filtrado_pais.py
+```
+
+El archivo de salida se guardará en la carpeta `feeds` con un nombre que incluye el país y un timestamp, por ejemplo:
+
+```plaintext
+feeds/IP_Reputation_filtrado_ES_*****.json
+```
+
+### 3. Modificar el Código de País
+
+Puedes cambiar el código de país modificando la variable `pais` dentro de `filtrado_pais.py`. Por ejemplo:
+
+```python
+pais = 'ES'  # Cambiar a España
+```
+
+## Tests
+
+Este proyecto incluye una suite de tests automáticos para validar su funcionamiento. Los tests están ubicados en el archivo `test_filtrado_pais.py` y cubren casos como:
+
+- Archivos con registros válidos.
+- Archivos sin coincidencias.
+- Archivos JSON vacíos o malformados.
+- Archivos inexistentes.
+
+### Ejecutar los Tests
+
+Para ejecutar los tests, usa el siguiente comando:
+
+```bash
+python -m unittest test_filtrado_pais.py
+```
+
+Salida esperada si todo funciona correctamente:
+
+```plaintext
+Total registros procesados: 4
+Registros ignorados: 2
+Se encontraron 2 registros con country = 'ES' (Spain).
+Registros filtrados guardados en: feeds/test_filtered_feed.json
+...
+Ran 5 tests in 0.018s
+
+OK
+```
+
+## Ejemplo de JSON de Entrada
+
+El archivo `IP_Reputation_Data_Feed_171224_0757.json` debe tener una estructura similar a la siguiente:
+
+```json
+[
+    {"ip_whois": {"country": "ES", "org": "ISP España"}},
+    {"ip_whois": {"country": "US", "org": "ISP USA"}},
+    {"ip_whois": {"country": "ES", "org": "ISP España 2"}}
+]
+```
+
+## Ejemplo de JSON Filtrado
+
+Un archivo filtrado para `country = 'ES'` tendría la siguiente estructura:
+
+```json
+[
+    {"ip_whois": {"country": "ES", "org": "ISP España"}},
+    {"ip_whois": {"country": "ES", "org": "ISP España 2"}}
+]
+```
+
+## Manejo de Errores
+
+El script maneja los siguientes casos de error:
+
+1. **Archivo Inexistente**:
+   - Mensaje: `Error: El archivo 'archivo_inexistente.json' no se encuentra.`
+2. **JSON Malformado**:
+   - Mensaje: `Error: El archivo no es un JSON válido.`
+3. **Estructura Inválida**:
+   - Mensaje: `Advertencia: Se encontró un registro con formato incorrecto y se omitió.`
+
+## 🚀 Próximos Pasos
+
+A continuación, algunas ideas para mejorar y extender este proyecto: (en proceso...)
+
+### 1. Cobertura Geográfica vs. Administrativa
+
+- Implementar la posibilidad de usar **`ip_geo`** o **`ip_whois.country`** como filtros separados o combinados (`OR` o `AND`).
+- Añadir una clasificación detallada en los resultados, como:
+  - **Geográfica**: IPs relacionadas con España por geolocalización (`ip_geo`).
+  - **Administrativa**: IPs relacionadas con España por registros administrativos (`ip_whois.country`).
+  - **Ambos**: IPs que cumplen ambos criterios.
+
+### 2. Soporte para Más Formatos de Entrada y Salida
+
+- **Entrada**:
+  - Agregar soporte para otros formatos como CSV, Excel o bases de datos.
+  - Permitir importar datos desde APIs o servicios web.
+- **Salida**:
+  - Generar reportes en formatos como CSV o Excel.
+  - Exportar datos filtrados a una base de datos relacional (como PostgreSQL o MySQL).
+
+### 3. Optimización del Filtro
+
+- **Mejoras en el Filtro**:
+  - Implementar filtros adicionales, como por rango de IPs (`192.168.x.x`), organización, o tipo de conexión.
+  - Añadir soporte para reglas complejas usando expresiones regulares.
+- **Velocidad**:
+  - Usar técnicas de procesamiento en paralelo para manejar grandes volúmenes de datos.
+
+### 4. Interfaz de Usuario
+
+- **Línea de Comandos**:
+  - Integrar `argparse` para que el usuario pueda especificar el código de país, archivo de entrada y archivo de salida directamente desde la terminal.
+- **Interfaz Gráfica**:
+  - Crear una interfaz gráfica básica usando bibliotecas como `tkinter` o `PyQt`.
+
+### 5. Detección de Anomalías
+
+- Identificar y marcar IPs con discrepancias entre geolocalización (`ip_geo`) y registro administrativo (`ip_whois.country`).
+- Generar alertas para IPs maliciosas o sospechosas basadas en listas negras (blacklists) públicas.
+
+### 6. Análisis Visual
+
+- Crear gráficos y estadísticas con bibliotecas como `matplotlib` o `Plotly` para mostrar:
+  - Distribución geográfica de las IPs.
+  - Organización o proveedor con más registros.
+- Generar dashboards interactivos con **Streamlit** para analizar los datos.
+
+### 7. Documentación y Automatización
+
+- **Mejorar la Documentación**:
+  - Crear una guía para contribuir al proyecto.
+  - Agregar ejemplos de uso más avanzados.
+- **Automatización**:
+  - Crear un script de instalación o configuración para facilitar el despliegue en nuevos entornos.
+
+---
+
+### ¿Más Ideas?
+
+Si tienes otras ideas o sugerencias, ¡no dudes en contribuir o abrir un issue en el repositorio! 😊
+
+## Autor
+
+Desarrollado por @pedrojorgeviana, si tienes preguntas o sugerencias, no dudes en contactarme.
+
+## Nota sobre el uso de IA
+
+Este proyecto fue desarrollado con la ayuda de herramientas de inteligencia artificial (IA) como ChatGPT. Todo el contenido generado ha sido supervisado, adaptado y validado por el autor para garantizar su calidad y funcionalidad.
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
