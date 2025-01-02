@@ -42,6 +42,7 @@ Este proyecto utiliza los **Threat DataFeeds de Kaspersky** para procesar y filt
 2. Inicia sesión con tus credenciales.
 3. Descarga el feed de datos correspondiente (por ejemplo, `IP_Reputation_Data_Feed.json`).
 4. Coloca el archivo descargado en la carpeta `feeds` del proyecto.
+5. Modifica la variable `fichero_entrada` en el fichero `filtrado_pais.py` por el nombre del feed de datos descargado
 
 ## 📁 Estructura del Proyecto
 
