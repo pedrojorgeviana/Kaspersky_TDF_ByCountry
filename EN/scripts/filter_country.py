@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     # Files in the feeds folder
     folder = "./feeds/"
-    input_file = os.path.join(folder, "IP_Reputation_Data_Feed_200516_1445.json")
+    input_file = os.path.join(folder, "IP_Reputation_Data_Feed.json")
     output_file = os.path.join(folder, f"IP_Reputation_filtered_{country}_{timestamp}.json")
 
     # Execute the function
