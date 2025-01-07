@@ -1,7 +1,7 @@
 # Proof of Concept - IP Reputation Filtering by Country
 
 > **WARNING:** This script is provided as a Proof of Concept (PoC) for educational and demonstrative purposes only. It is not an official Kaspersky tool and does not offer functionality guarantees or support. Use it at your own risk and always validate the results in your environment.
-
+---
 This project allows filtering records from a JSON file containing Threat Data Feeds from the **Kaspersky Threat Intelligence Portal**, which includes IP reputation data based on the **ISO 3166-1 alpha-2 country code**. The primary goal is to process large datasets, identify specific records by country, and generate a filtered file with the results.
 
 ## 🎯 Features

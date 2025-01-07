@@ -1,7 +1,7 @@
 # Prueba de Concepto - Filtrado de IP Reputation por País
 
 > **English version available:** For the English version of this documentation, see [README.en.md](./EN/README.en.md).
-
+---
 > **AVISO:** Este script se proporciona como una Prueba de Concepto (PoC) con fines educativos y demostrativos únicamente. No es una herramienta oficial de Kaspersky, ni ofrece garantías o soporte de funcionalidad. Úselo bajo su propio riesgo y siempre valide los resultados en su entorno.
 
 Este proyecto permite filtrar registros de un archivo JSON de Threat DataFeeds de Kaspersky Threat Intelligence Portal, que contiene datos de reputación de IPs en base al **código de país** especificado en formato ISO 3166-1 alfa-2. El objetivo principal es procesar grandes conjuntos de datos, identificar registros específicos por país y generar un archivo filtrado con los resultados.
