@@ -53,19 +53,19 @@ This project uses **Threat DataFeeds de Kaspersky** to process and filter record
 ├── EN/
 │   ├── scripts/
 │   │   ├── feeds/
-│   │   │   ├── IP_Reputation_Data_Feed_****.json   # Archivo de entrada de ejemplo
-│   │   │   └── ...                                 # Otros archivos de prueba
-│   │   ├── filter_by_country.py                   # Script principal en inglés
-│   │   └── test_filter_by_country.py              # Tests automáticos en inglés
-│   ├── README.en.md                                # Documentación en inglés
+│   │   │   ├── IP_Reputation_Data_Feed_****.json   # Example input file
+│   │   │   └── ...                                 # Other test files
+│   │   ├── filter_by_country.py                    # Script in english
+│   │   └── test_filter_by_country.py               # English automated tests
+│   ├── README.en.md                                # English readme
 ├── ES/
 │   ├── scripts/
 │   │   ├── feeds/
 │   │   │   ├── IP_Reputation_Data_Feed_****.json   # Archivo de entrada de ejemplo
 │   │   │   └── ...                                 # Otros archivos de prueba
-│   │   ├── filtrado_pais.py                       # Script principal en español
-│   │   ├── filtrado_pais_avanzado.py              # Script avanzado en español
-│   │   └── test_filtrado_pais.py                  # Tests automáticos en español
+│   │   ├── filtrado_pais.py                        # Script principal en español
+│   │   ├── filtrado_pais_avanzado.py               # Script avanzado en español
+│   │   └── test_filtrado_pais.py                   # Tests automáticos en español
 │   ├── README.md                                   # Documentación en español
 ├── .gitignore
 ├── LICENSE
