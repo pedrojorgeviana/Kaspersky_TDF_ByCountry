@@ -243,4 +243,4 @@ Sigue las instrucciones para filtrar por España (`ES`) y modo combinado (`combi
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](`LICENSE`) para más detalles.
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
