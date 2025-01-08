@@ -9,17 +9,20 @@ This project includes Python and PowerShell scripts to filter records from a JSO
 ## 🎯 Features
 
 ### Basic Scripts:
+
 - **Simple Country Filtering:**
   - **Python:** `filtrado_pais.py` (Spanish) and `filter_country.py` (English).
   - Filters records where the `ip_whois.country` field matches the specified ISO country code.
 
 ### Advanced Scripts:
+
 - **Multiple Filtering Modes:**
   - **Python:** `filtrado_pais_avanzado.py` (Spanish) and `filter_country_advanced.py` (English).
   - Modes: Geographic (`geo`), Administrative (`admin`), or Combined (`combined`).
   - CLI parameter support with `argparse`.
 
 ### PowerShell Scripts:
+
 - Scripts available for Windows users:
   - `FiltrarPorPais.ps1` (Spanish).
   - `FilterByCountry.ps1` (English).
@@ -29,14 +32,17 @@ This project includes Python and PowerShell scripts to filter records from a JSO
 
 - **Python:** Version 3.8 or higher.
 - **Python Dependencies:**
+
   ```bash
   pip install -r requirements.txt
   ```
+
 - **PowerShell:** Version 5.1 or higher (PowerShell 7+ recommended).
 
 ## 📥 Data Preparation
 
 Manually download the data from [Kaspersky Threat Intelligence Portal](https://tip.kaspersky.com):
+
 1. Download the required data feed (`IP_Reputation_Data_Feed.json`).
 2. Place the downloaded file in the project’s `feeds/` folder.
 
@@ -67,49 +73,65 @@ Manually download the data from [Kaspersky Threat Intelligence Portal](https://t
 ### Python
 
 #### Basic Execution:
+
 - **Purpose:** Filter data by country using the `ip_whois.country` field.
 - **Command:**
+
   ```bash
   python scripts/Python/filter_country.py
   ```
+
   - Configure the country in the script by editing the `country` variable (default: `ES`).
 
 #### Advanced Execution:
+
 - **Purpose:** Filter data with advanced modes (`geo`, `admin`, `combined`).
 - **Command:**
+
   ```bash
   python scripts/Python/filter_country_advanced.py --country ES --filter-mode geo
   ```
+
   - Change `--country` to the desired ISO country code.
   - Modify the input file using `--input-file`.
 
 #### Example:
+
 Suppose you have the file `IP_Reputation_Data_Feed.json` in the `feeds/` folder and want to filter records for Spain (`ES`):
+
 ```bash
 python scripts/Python/filter_country_advanced.py --country ES --filter-mode combined --input-file feeds/IP_Reputation_Data_Feed.json
 ```
+
 The resulting file will be automatically saved in `feeds/` with a name that includes the country, mode, and a timestamp.
 
 ### PowerShell
 
 #### Interactive Execution:
+
 - **Purpose:** Interactively filter data in Windows.
 - **Command:**
+
   ```powershell
   .\scripts\PowerShell\FilterByCountry.ps1
   ```
+
   - Follow the instructions to enter the country and choose the filtering mode.
 
 #### Example:
+
 Place the input file `IP_Reputation_Data_Feed.json` in the `feeds/` folder. Then execute:
+
 ```powershell
 .\scripts\PowerShell\FilterByCountry.ps1
 ```
+
 Follow the instructions to filter by Spain (`ES`) and combined mode (`combined`).
 
 ## 📝 Usage Examples
 
 ### Input JSON
+
 ```json
 [
     {
@@ -176,7 +198,8 @@ Follow the instructions to filter by Spain (`ES`) and combined mode (`combined`)
 ]
 ```
 
-### Filtered JSON (Example for `country = ES`)
+### Filtered JSON (Example for `country = ES` and filter combined mode `combined`.)
+
 ```json
 [
     {
