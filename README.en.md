@@ -43,7 +43,7 @@ This project uses **Threat DataFeeds de Kaspersky** to process and filter record
 2. Log in with your credentials.
 3. Download the corresponding data feed (e.g., `IP_Reputation_Data_Feed.json`).
 4. Place the downloaded file into the `feeds` folder of the project.
-5. Modify the `fichero_entrada` variable in the `filtrado_pais.py` file to match the name of the downloaded data feed.
+5. Modify the `fichero_entrada` variable in the `filter_country_advanced.py` file to match the name of the downloaded data feed.
 
 ## 📁 Project Structure
 
@@ -63,14 +63,45 @@ This project uses **Threat DataFeeds de Kaspersky** to process and filter record
 │   │   ├── feeds/
 │   │   │   ├── IP_Reputation_Data_Feed_****.json   # Archivo de entrada de ejemplo
 │   │   │   └── ...                                 # Otros archivos de prueba
-│   │   ├── filtrado_pais.py                        # Script principal en español
-│   │   ├── filtrado_pais_avanzado.py               # Script avanzado en español
-│   │   └── test_filtrado_pais.py                   # Tests automáticos en español
+│   │   ├── filter_country_advanced.py                        # Script principal en español
+│   │   ├── filter_country_advanced_avanzado.py               # Script avanzado en español
+│   │   └── test_filter_country_advanced.py                   # Tests automáticos en español
 │   ├── README.md                                   # Documentación en español
 ├── .gitignore
 ├── LICENSE
 └── requirements.txt
 ```
+### Additional Information: Using the Script in PowerShell
+
+In addition to the Python scripts, this project includes a PowerShell version to filter records in a JSON file based on the country code.
+
+#### **Script Location**
+
+The PowerShell scripts are available in the following folders:
+
+- **Spanish**: `ES/scripts/FiltrarPorPais.ps1`
+- **English**: `EN/scripts/FilterByCountry.ps1`
+
+#### **PowerShell Requirements**
+
+1. **PowerShell**: Version 5.1 or higher. PowerShell 7+ is recommended for better compatibility.
+2. **Internet Connection**: Required to validate country codes using the RESTCountries API.
+3. **Input JSON File**: The file must be located in the `feeds/` folder.
+
+#### **How to Use the PowerShell Scripts**
+
+1. Place the input file (`IP_Reputation_Data_Feed.json`) in the `feeds/` folder.
+2. Run the script from the `EN/scripts` folder:
+
+   ```powershell
+   .\FilterByCountry.ps1
+   ```
+
+3. Follow the prompts:
+
+- Enter the country code in ISO 3166-1 alpha-2 format (e.g., `ES` for Spain).
+
+- Select the filtering mode: `geo`, `admin`, or `combined` (default: `combined`).
 
 ## Usage
 
@@ -88,7 +119,7 @@ feeds/
 Run the main script to filter records by a specific country code:
 
 ```bash
-python filtrado_pais.py
+python filter_country_advanced.py
 ```
 
 The output file will be saved in the `feeds` folder with a name that includes the country code and a timestamp, for example:
@@ -99,7 +130,7 @@ feeds/IP_Reputation_filtered_ES_*****.json
 
 ### 3. Modify the Country Code
 
-You can change the country code by modifying the `pais` variable inside `filtrado_pais.py`. For example:
+You can change the country code by modifying the `pais` variable inside `filter_country_advanced.py`. For example:
 
 ```python
 pais = 'ES'  # Change to Spain or any other country
@@ -107,7 +138,7 @@ pais = 'ES'  # Change to Spain or any other country
 
 ## Tests
 
-This project includes a suite of automated tests to validate its functionality. The tests are located in the `test_filtrado_pais.py` file and cover scenarios such as:
+This project includes a suite of automated tests to validate its functionality. The tests are located in the `test_filter_country_advanced.py` file and cover scenarios such as:
 
 - Files with valid records.
 - Files with no matching records.
@@ -119,7 +150,7 @@ This project includes a suite of automated tests to validate its functionality. 
 To run the tests, use the following command:
 
 ```bash
-python -m unittest test_filtrado_pais.py
+python -m unittest test_filter_country_advanced.py
 ```
 
 Expected output if everything works correctly:
