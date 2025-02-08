@@ -1,27 +1,26 @@
 # Prueba de Concepto - Filtrado de Datos por Código de País
 
 > **English version available:** See [README.en.md](README.en.md).
-
 > **AVISO:** Este script se proporciona como una Prueba de Concepto (PoC) con fines educativos y demostrativos únicamente. No es una herramienta oficial de Kaspersky, ni ofrece garantías o soporte de funcionalidad. Úselo bajo su propio riesgo y siempre valide los resultados en su entorno.
 
 Este proyecto incluye scripts en Python y PowerShell para filtrar registros de un archivo JSON de Threat Data Feeds del Kaspersky Threat Intelligence Portal, basado en un **código de país ISO 3166-1 alfa-2**. Estos scripts permiten identificar registros relevantes, generando un archivo filtrado con los resultados.
 
 ## 🎯 Características
 
-### Scripts Básicos:
+### Scripts Básicos
 
 - **Filtrado Simple por País:**
   - **Python:** `filtrado_pais.py` (español) y `filter_country.py` (inglés).
   - Filtrado por registros donde el campo `ip_whois.country` coincide con el código ISO del país especificado.
 
-### Scripts Avanzados:
+### Scripts Avanzados
 
 - **Modos de Filtrado Múltiples:**
   - **Python:** `filtrado_pais_avanzado.py` (español) y `filter_country_advanced.py` (inglés).
   - Modos: Geográfico (`geo`), Administrativo (`admin`), o Combinado (`combined`).
   - Soporte para parámetros CLI con `argparse`.
 
-### Scripts en PowerShell:
+### Scripts en PowerShell
 
 - Scripts disponibles para usuarios de Windows:
   - `FiltrarPorPais.ps1` (español).
@@ -72,7 +71,7 @@ Descarga manualmente los datos desde [Kaspersky Threat Intelligence Portal](http
 
 ### Python
 
-#### Ejecución Básica:
+#### Ejecución Básica
 
 - **Propósito:** Filtrar datos por país usando el campo `ip_whois.country`.
 - **Comando:**
@@ -83,7 +82,7 @@ Descarga manualmente los datos desde [Kaspersky Threat Intelligence Portal](http
 
   - Configura el país en el script editando la variable `pais` (por defecto: `ES`).
 
-#### Ejecución Avanzada:
+#### Ejecución Avanzada
 
 - **Propósito:** Filtrar datos con modos avanzados (`geo`, `admin`, `combined`).
 - **Comando:**
@@ -95,7 +94,7 @@ Descarga manualmente los datos desde [Kaspersky Threat Intelligence Portal](http
   - Cambia `--country` por el código ISO del país deseado.
   - Modifica el archivo de entrada usando `--input-file`.
 
-#### Ejemplo:
+#### Ejemplo
 
 Supongamos que tienes el archivo `IP_Reputation_Data_Feed.json` en la carpeta `feeds/` y quieres filtrar registros para España (`ES`):
 
@@ -107,7 +106,7 @@ El archivo resultante se guardará automáticamente en `feeds/` con un nombre qu
 
 ### PowerShell
 
-#### Ejecución Interactiva:
+#### Ejecución Interactiva
 
 - **Propósito:** Filtrar datos de manera interactiva en Windows.
 - **Comando:**
@@ -118,7 +117,7 @@ El archivo resultante se guardará automáticamente en `feeds/` con un nombre qu
 
   - Sigue las instrucciones para ingresar el país y elegir el modo de filtrado.
 
-#### Ejemplo:
+##### Ejemplo de Ejecución
 
 Coloca el archivo de entrada `IP_Reputation_Data_Feed.json` en la carpeta `feeds/`. Luego ejecuta:
 
