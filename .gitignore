@@ -4,6 +4,9 @@
 *.pyd
 __pycache__/
 *.env
+
+# Secrets / environment variables (must be explicit — *.env does not catch bare .env)
+.env
 .venv/
 *.egg-info/
 .Python
