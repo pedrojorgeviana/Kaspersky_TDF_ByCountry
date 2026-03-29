@@ -100,9 +100,9 @@ function Obtener-Configuracion {
 
     return @{
         Token    = $token.Trim()
-        UrlBase  = $urlBase.Trim()
+        BaseUrl  = $urlBase.Trim()
         Endpoint = $endpoint.Trim()
-        Limite   = $limiteVal
+        Limit    = $limiteVal
     }
 }
 
@@ -169,18 +169,18 @@ function Obtener-ModoSiFalta {
 
 function Construir-UrlFeed {
     param(
-        [string]$UrlBase,
+        [string]$BaseUrl,
         [string]$Endpoint,
-        [int]$Limite
+        [int]$Limit
     )
 
-    if (-not $UrlBase.StartsWith("https://")) {
+    if (-not $BaseUrl.StartsWith("https://")) {
         Write-Host "Error: KASPERSKY_TIP_BASE_URL debe usar HTTPS. Revise su archivo .env." -ForegroundColor Red
         exit 1
     }
 
-    $url = "$($UrlBase.TrimEnd('/'))/$Endpoint"
-    if ($Limite -gt 0) { $url += "?limit=$Limite" }
+    $url = "$($BaseUrl.TrimEnd('/'))/$Endpoint"
+    if ($Limit -gt 0) { $url += "?limit=$Limit" }
     return $url
 }
 
@@ -405,7 +405,7 @@ try {
 
         # Aplicar sobreescrituras de la línea de comandos (solo endpoint y límite)
         if ($FeedEndpoint -ne "") { $config.Endpoint = $FeedEndpoint }
-        if ($Limit -ge 0)         { $config.Limite   = $Limit }
+        if ($Limit -ge 0)         { $config.Limit    = $Limit }
     }
 
     # Resolver país y modo de filtrado (parámetros o prompts interactivos)
@@ -426,7 +426,7 @@ try {
             "Authorization" = "Bearer $($env:KASPERSKY_TIP_TOKEN)"
             "Accept"        = "application/json"
         }
-        $url    = Construir-UrlFeed -UrlBase $config.UrlBase -Endpoint $config.Endpoint -Limite $config.Limite
+        $url    = Construir-UrlFeed -BaseUrl $config.BaseUrl -Endpoint $config.Endpoint -Limit $config.Limit
         Write-Host "Descargando feed desde Kaspersky TIP API..."
         $datos  = Invocar-FeedApi -Cabeceras $cabeceras -Url $url
         $origen = "Endpoint API: $($config.Endpoint)"

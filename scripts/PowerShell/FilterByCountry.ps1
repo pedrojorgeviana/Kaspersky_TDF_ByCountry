@@ -128,14 +128,15 @@ function Filter-Data {
 
     switch ($Mode) {
         "geo" {
-            return $Data | Where-Object { $_.ip_geo -eq $GeoCountry }
+            return $Data | Where-Object { $_.ip_geo -and $_.ip_geo.ToLower() -eq $GeoCountry }
         }
         "admin" {
-            return $Data | Where-Object { $_.ip_whois.country -eq $AdminCountry }
+            return $Data | Where-Object { $_.ip_whois -and $_.ip_whois.country -and $_.ip_whois.country.ToUpper() -eq $AdminCountry }
         }
         "combined" {
             return $Data | Where-Object {
-                $_.ip_geo -eq $GeoCountry -or $_.ip_whois.country -eq $AdminCountry
+                ($_.ip_geo -and $_.ip_geo.ToLower() -eq $GeoCountry) -or
+                ($_.ip_whois -and $_.ip_whois.country -and $_.ip_whois.country.ToUpper() -eq $AdminCountry)
             }
         }
     }

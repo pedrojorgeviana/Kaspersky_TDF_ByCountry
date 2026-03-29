@@ -111,9 +111,9 @@ def cargar_configuracion():
         limite = 0
     return {
         "token": token,
-        "url_base": url_base,
-        "endpoint": endpoint,
-        "limite": limite,
+        "base_url": url_base,
+        "feed_endpoint": endpoint,
+        "limit": limite,
     }
 
 
@@ -400,9 +400,9 @@ def main():
             validar_token_presente(config["token"])
             # Aplicar sobreescrituras de la línea de comandos (solo endpoint y límite)
             if args.feed_endpoint:
-                config["endpoint"] = args.feed_endpoint
+                config["feed_endpoint"] = args.feed_endpoint
             if args.limit is not None:
-                config["limite"] = args.limit
+                config["limit"] = args.limit
 
         # Resolver país y modo de filtrado (desde argumentos CLI o prompts interactivos)
         entrada_pais = solicitar_pais_si_falta(args.country)
@@ -417,11 +417,11 @@ def main():
             datos = cargar_archivo_entrada(args.input_file)
             origen = f"Archivo local: {args.input_file}"
         else:
-            url = construir_url_feed(config["url_base"], config["endpoint"], config["limite"])
+            url = construir_url_feed(config["base_url"], config["feed_endpoint"], config["limit"])
             print("Descargando feed desde Kaspersky TIP API...")
             sesion = crear_sesion_api(config["token"])
             datos = obtener_feed(sesion, url)
-            origen = f"Endpoint API: {config['endpoint']}"
+            origen = f"Endpoint API: {config['feed_endpoint']}"
             print(f"  Descargados {len(datos)} registros.")
 
             if args.save_raw:

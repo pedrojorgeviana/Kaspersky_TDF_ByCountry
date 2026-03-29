@@ -7,6 +7,7 @@
 import json
 import datetime
 import os
+import sys
 import pycountry
 
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -39,7 +40,6 @@ def filtrar_por_pais(fichero_entrada, fichero_salida):
         # Filtrar los datos
         registros_filtrados = [
             registro for registro in datos
-#            if registro.get("ip_geo").upper() == pais.upper() // TBD
             if registro.get("ip_whois", {}).get("country", "").upper() == pais.upper()
         ]
 
@@ -58,13 +58,13 @@ def filtrar_por_pais(fichero_entrada, fichero_salida):
 
     except FileNotFoundError as e:
         print(f"Error: El archivo '{fichero_entrada}' no se encuentra.")
-        raise
+        sys.exit(1)
     except json.JSONDecodeError as e:
         print(f"Error: El archivo no es un JSON válido. Detalle: {e}")
-        raise
+        sys.exit(1)
     except Exception as e:
         print(f"Error inesperado: {e}")
-        raise
+        sys.exit(1)
 
 if __name__ == "__main__":
      # Mostrar aviso
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     print(disclaimer)
     # Archivos en la carpeta feeds
     carpeta = "./feeds/"
-    fichero_entrada = os.path.join(carpeta, "IP_Reputation_Data_Feed_200516_1445.json")
+    fichero_entrada = os.path.join(carpeta, "IP_Reputation_Data_Feed.json")
     fichero_salida = os.path.join(carpeta, f"IP_Reputation_filtrado_{pais}_{timestamp}.json")
     
     # Ejecutar la función
