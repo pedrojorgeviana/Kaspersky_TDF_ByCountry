@@ -7,6 +7,7 @@
 import json
 import datetime
 import os
+import sys
 import pycountry
 
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -57,13 +58,13 @@ def filter_by_country(input_file, output_file):
 
     except FileNotFoundError as e:
         print(f"Error: The file '{input_file}' was not found.")
-        raise
+        sys.exit(1)
     except json.JSONDecodeError as e:
         print(f"Error: The file is not a valid JSON. Details: {e}")
-        raise
+        sys.exit(1)
     except Exception as e:
         print(f"Unexpected error: {e}")
-        raise
+        sys.exit(1)
 
 if __name__ == "__main__":
     # Display disclaimer

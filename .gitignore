@@ -4,6 +4,9 @@
 *.pyd
 __pycache__/
 *.env
+
+# Secrets / environment variables (must be explicit — *.env does not catch bare .env)
+.env
 .venv/
 *.egg-info/
 .Python
@@ -31,6 +34,10 @@ Thumbs.db
 feeds/test_filtered_feed.json
 feeds/*.tmp
 feeds/*.bak
+
+# Outputs generados por los scripts (excepto el fichero de ejemplo)
+feeds/IP_Reputation_*_*_*.json
+feeds/IP_Reputation_raw_*.json
 
 # Cobertura de código
 htmlcov/

@@ -183,12 +183,16 @@ def main():
 
     except FileNotFoundError as e:
         print(f"Error: {e}")
+        sys.exit(1)
     except PermissionError as e:
         print(f"Error: {e}")
+        sys.exit(1)
     except ValueError as e:
         print(f"Error: {e}")
+        sys.exit(1)
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
