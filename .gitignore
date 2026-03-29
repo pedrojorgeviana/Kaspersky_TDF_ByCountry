@@ -50,3 +50,6 @@ ENV/
 *.zip
 *.tar.gz
 *.rar
+
+# Claude Code — configuración y memoria local (no sincronizar)
+.claude/
